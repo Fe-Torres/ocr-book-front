@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { API_URL } from "../config/env";
 
 export function useRead() {
   const [imageResult, setImageResult] = useState<string | null>(null);
@@ -10,47 +11,27 @@ export function useRead() {
   async function readImage(base64: string) {
     setIsReading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/read-image",
-        {
-          imgBase64: base64,
-        },
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
+      const response = await axios.post(`${API_URL}/read-image`, { imgBase64: base64 });
 
-      const data = await interpretateImage(response.data.codeResult);
+      const data = await interpretImage(response.data.codeResult);
       setImageResult(data);
       setCodeResultOpen(true);
-    } catch (error: any) {
-      console.log(error);
+    } catch (error) {
+      console.error("Error reading image:", error);
     } finally {
       setIsReading(false);
       setSelectedFile(null);
     }
   }
 
-  async function interpretateImage(code: string): Promise<string | null> {
+  async function interpretImage(code: string): Promise<string | null> {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/run-code",
-        {
-          codeText: code,
-        },
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
+      const response = await axios.post(`${API_URL}/run-code`, { codeText: code });
 
-      setSelectedFile(null);
       return response.data.codeResult;
-    } catch (error: any) {
-      return error.response.data.message;
+    } catch (error) {
+      console.error("Error interpreting image:", error);
+      return null;
     }
   }
 

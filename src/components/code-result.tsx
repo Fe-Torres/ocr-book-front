@@ -34,7 +34,7 @@ export const CodeResult = ({
         <div className="flex justify-center">
           <section className="w-full flex flex-row">
             <div className="w-full flex items-center flex-col mt-11">
-              <strong className="text-2xl">Code result:</strong>
+              <strong className="text-2xl">Result</strong>
               <p className="text-xl mt-4">{code}</p>
             </div>
             <div
