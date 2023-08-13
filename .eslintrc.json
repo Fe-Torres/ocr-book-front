@@ -1,0 +1,50 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "no-useless-constructor": "off",
+    "no-undef": 0,
+    "indent": ["error", 2], // Definir o tamanho da indentação como 2 espaços
+    "semi": ["error", "always"], // Exigir ponto e vírgula após as instruções
+    "quotes": ["error", "double"], // Usar aspas duplas para strings
+    "no-trailing-spaces": "error", // Proibir espaços em branco no final das linhas
+    "no-unused-vars": [
+      "error",
+      { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
+    ],
+    "max-len": ["error", { "code": 120 }], // Definir o limite de 80 caracteres por linha
+    "no-const-assign": "error", // Proibir reatribuição de valores a constantes
+    "no-extra-semi": "error", // Proibir ponto e vírgula extras
+    "no-unreachable": "error", // Relatar código inalcançável,
+    "padding-line-between-statements": [
+      "error",
+
+      // Espaço em branco antes de uma declaração de função
+      { "blankLine": "always", "prev": "*", "next": "function" },
+
+      // Espaço em branco antes e depois de blocos de controle (if, for, while, etc.)
+      { "blankLine": "always", "prev": "*", "next": "if" },
+      { "blankLine": "always", "prev": "if", "next": "*" },
+      { "blankLine": "always", "prev": "*", "next": "for" },
+      { "blankLine": "always", "prev": "for", "next": "*" },
+      { "blankLine": "always", "prev": "*", "next": "while" },
+      { "blankLine": "always", "prev": "while", "next": "*" }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.spec.ts"],
+      "rules": {
+        "no-undef": 0
+      }
+    }
+  ]
+}

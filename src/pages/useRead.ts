@@ -11,7 +11,9 @@ export function useRead() {
   async function readImage(base64: string) {
     setIsReading(true);
     try {
-      const response = await axios.post(`${API_URL}/read-image`, { imgBase64: base64 });
+      const response = await axios.post(`${API_URL}/read-image`, {
+        imgBase64: base64,
+      });
 
       const data = await interpretImage(response.data.codeResult);
       setImageResult(data);
@@ -26,7 +28,9 @@ export function useRead() {
 
   async function interpretImage(code: string): Promise<string | null> {
     try {
-      const response = await axios.post(`${API_URL}/run-code`, { codeText: code });
+      const response = await axios.post(`${API_URL}/run-code`, {
+        codeText: code,
+      });
 
       return response.data.codeResult;
     } catch (error) {
