@@ -32,10 +32,10 @@ export function useRead() {
         codeText: code,
       });
 
-      return response.data.codeResult;
-    } catch (error) {
+      return response.data.codeResult || response.data.message;
+    } catch (error: any) {
       console.error("Error interpreting image:", error);
-      return null;
+      return error.message;
     }
   }
 

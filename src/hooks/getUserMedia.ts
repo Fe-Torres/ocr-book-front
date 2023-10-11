@@ -22,17 +22,9 @@ export function userMedia() {
   }
 
   async function readImage(file: any) {
-    const response = await axios.post(
-      "http://localhost:3000/read-image",
-      {
-        imgbase64: file,
-      },
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    );
+    const response = await axios.post("http://localhost:3000/read-image", {
+      imgbase64: file,
+    });
 
     console.log(response.data);
   }
